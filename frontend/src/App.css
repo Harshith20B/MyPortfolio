@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Fira+Code:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-primary text-textLight font-sans;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  @apply bg-accent bg-opacity-30 text-textLight;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent bg-opacity-50;
+}
