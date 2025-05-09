@@ -42,72 +42,132 @@ const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="py-24 px-8 md:px-24 bg-primary"
+      className="py-12 md:py-24 px-4 md:px-24 bg-primary"
     >
       <div className="container mx-auto">
-        <h2 className="flex items-center text-2xl md:text-3xl font-bold text-textLight mb-16">
+        <h2 className="flex items-center text-xl md:text-3xl font-bold text-textLight mb-8 md:mb-16">
           <span className="text-accent font-mono mr-2">03.</span> Projects
           <div className="ml-4 h-px bg-gray-600 flex-grow"></div>
         </h2>
 
-        <div className="space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {projects.map((project, index) => (
-            <div key={index} className={`relative flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center`}>
-              {/* Project Image */}
-              <div className={`w-full md:w-3/5 relative z-10 ${index % 2 === 0 ? 'md:right-0' : 'md:left-0'}`}>
-                <div className="relative group overflow-hidden rounded-lg">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+            <div key={index} className="relative">
+              {/* Mobile Layout - Stack vertically for all projects */}
+              <div className="md:hidden flex flex-col">
+                <div className="w-full relative z-10 mb-4">
+                  <div className="relative overflow-hidden rounded-lg">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full object-cover"
+                    />
+                  </div>
+                </div>
+                
+                <div className="w-full z-20">
+                  <div className="bg-secondary p-5 rounded-lg shadow-xl">
+                    <p className="text-accent font-mono text-sm mb-2">Featured Project</p>
+                    <h3 className="text-lg font-bold text-textLight mb-3">{project.title}</h3>
+                    <div className="bg-primary p-4 rounded-lg mb-4">
+                      <p className="text-text text-sm">{project.description}</p>
+                    </div>
+                    <ul className="flex flex-wrap gap-2 mb-4">
+                      {project.techStack.map((tech, techIndex) => (
+                        <li key={techIndex} className="text-text font-mono text-xs">
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex gap-4">
+                      {project.githubLink && (
+                        <a
+                          href={project.githubLink}
+                          className="text-textLight hover:text-accent transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`GitHub repository for ${project.title}`}
+                        >
+                          <FaGithub size={18} />
+                        </a>
+                      )}
+                      {project.demoLink && (
+                        <a
+                          href={project.demoLink}
+                          className="text-textLight hover:text-accent transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Live demo for ${project.title}`}
+                        >
+                          <FaExternalLinkAlt size={18} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Project Info */}
-              <div className={`w-full md:w-1/2 absolute md:relative z-20 ${
-                index % 2 === 0 ? 'md:left-0' : 'md:right-0'
-              } p-6 md:p-0`}>
-                <div className={`bg-secondary p-6 md:p-8 rounded-lg shadow-xl ${
-                  index % 2 === 0 ? 'md:text-right' : 'md:text-left'
-                }`}>
-                  <p className="text-accent font-mono mb-2">Featured Project</p>
-                  <h3 className="text-xl md:text-2xl font-bold text-textLight mb-4">{project.title}</h3>
-                  <div className="bg-primary p-6 rounded-lg mb-4">
-                    <p className="text-text">{project.description}</p>
+              {/* Desktop Layout - Alternating layout */}
+              <div className={`hidden md:flex ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} items-center`}>
+                {/* Project Image */}
+                <div className="w-3/5 relative z-10">
+                  <div className="relative group overflow-hidden rounded-lg">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-accent bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <ul className={`flex flex-wrap gap-3 mb-6 ${
-                    index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
+                </div>
+
+                {/* Project Info */}
+                <div className={`w-1/2 absolute z-20 ${
+                  index % 2 === 0 ? 'left-0' : 'right-0'
+                }`}>
+                  <div className={`bg-secondary p-8 rounded-lg shadow-xl ${
+                    index % 2 === 0 ? 'text-right' : 'text-left'
                   }`}>
-                    {project.techStack.map((tech, techIndex) => (
-                      <li key={techIndex} className="text-text font-mono text-sm">
-                        {tech}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className={`flex gap-4 ${
-                    index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'
-                  }`}>
-                    {project.githubLink && (
-                      <a
-                        href={project.githubLink}
-                        className="text-textLight hover:text-accent transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaGithub size={20} />
-                      </a>
-                    )}
-                    {project.demoLink && (
-                      <a
-                        href={project.demoLink}
-                        className="text-textLight hover:text-accent transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaExternalLinkAlt size={20} />
-                      </a>
-                    )}
+                    <p className="text-accent font-mono mb-2">Featured Project</p>
+                    <h3 className="text-2xl font-bold text-textLight mb-4">{project.title}</h3>
+                    <div className="bg-primary p-6 rounded-lg mb-4">
+                      <p className="text-text">{project.description}</p>
+                    </div>
+                    <ul className={`flex flex-wrap gap-3 mb-6 ${
+                      index % 2 === 0 ? 'justify-end' : 'justify-start'
+                    }`}>
+                      {project.techStack.map((tech, techIndex) => (
+                        <li key={techIndex} className="text-text font-mono text-sm">
+                          {tech}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className={`flex gap-4 ${
+                      index % 2 === 0 ? 'justify-end' : 'justify-start'
+                    }`}>
+                      {project.githubLink && (
+                        <a
+                          href={project.githubLink}
+                          className="text-textLight hover:text-accent transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`GitHub repository for ${project.title}`}
+                        >
+                          <FaGithub size={20} />
+                        </a>
+                      )}
+                      {project.demoLink && (
+                        <a
+                          href={project.demoLink}
+                          className="text-textLight hover:text-accent transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Live demo for ${project.title}`}
+                        >
+                          <FaExternalLinkAlt size={20} />
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
