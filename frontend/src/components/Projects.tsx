@@ -22,6 +22,14 @@ const Projects: React.FC = () => {
       githubLink: "https://github.com/Harshith20B/HAC_WebDev"
     },
     {
+      title: "AI-Based Stock Trading Web App",
+      description: "A full-stack trading simulator built with React and Flask, capable of processing 200+ mock trades. Features real-time stock analysis, AI-driven buy/sell decision support using LSTM models, and NLP-based sentiment analysis from financial news.",
+      techStack: ["MongoDB", "Python", "Flask", "REST APIs", "React.js"],
+      period: "Dec 2024 - Jan 2025",
+      image: "/assets/images/stock-trading-app.jpg", // Update with correct image path if needed
+      githubLink: "https://github.com/Harshith20B/Stock-Analysis"
+    },
+    {
       title: "E-Commerce Platform",
       description: "A scalable e-commerce solution with real-time inventory management and dynamic product categorization capabilities. Implemented secure user authentication, shopping cart functionality, and automated price calculations.",
       techStack: ["HTML", "CSS", "JavaScript", "Node", "MongoDB", "Express"],
